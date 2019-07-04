@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+	
+	//创建一个数组
+	var arr = [2,6,9,14,14,14,2,7,6,3,14];
+	 console.log(arr);
+
+	 //创建一个新的数组用来保存去重后的值
+	 var result = [];
+
+	 	//获取数组中的每一个元素
+	 	for(var i=0;i<arr.length;i++){
+
+	 		//从数组头部开始向后查找，将没有找到的元素提取出来
+	 		if(result.indexOf(arr[i],0) == -1){
+	 			
+	 			//将没有找到的元素添加到新的数组中								
+	 			result.push(arr[i]);
+	 		}
+	 	}
+
+	 console.log(result);
+</script>
+</html>

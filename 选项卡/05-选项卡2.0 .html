@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		ul{
+			text-align: center;
+			margin-left: 200px;
+
+			
+		}
+		li{
+			float: left;
+			width: 70px;
+			height: 70px;
+			line-height: 70px;
+			margin-right: 20px;
+			background-color: red;
+		}
+		.active{
+			background-color: #bfa;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li class="active">1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+		<li>7</li>
+		<li>8</li>
+		<li>9</li>
+		<li>10</li>
+	</ul>
+</body>
+<script>
+	var oUl = document.getElementsByTagName('ul');
+	var aLi = document.querySelectorAll('ul li');
+
+	var lastIndex = 0;//上一个选中的下标
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].index = i;//将i值存起来
+		console.log(aLi[i].index);//0 1 2 3 4 5 6 7 8 9
+		aLi[i].onmouseover = function(){
+			aLi[lastIndex].className = "";//清除上一个选项卡的active
+			this.className = "active";//将现在选中的选项卡添加active
+			lastIndex = this.index;//获取上一个选中的下标
+		}
+	}
+</script>
+</html>

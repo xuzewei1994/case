@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播图.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		#outer{
+			position: relative;
+			width: 520px;
+			height: 333px;
+			margin: 50px auto;
+			background-color: yellowgreen;
+			padding: 10px 0;
+			overflow: hidden;
+		}
+		#imgList{
+			position: absolute;
+			/*每向左移动520个像素就显示下一张图片*/
+			left: 0;
+		}
+		#imgList li{
+			float: left;
+			margin: 0 10px;
+		}
+		#navDiv{
+			position: absolute;
+			bottom: 15px;
+		}
+		#navDiv a{
+			float: left;
+			width: 15px;
+			height: 15px;
+			background-color: red;
+			margin: 0 5px;
+			opacity: 0.5;
+			/*兼容IE8的透明*/
+			filter: alpha(opacity=50);
+		}
+		#navDiv a:hover{
+			background-color: black;
+		}
+	</style>
+</head>
+<body>
+	<div id="outer">
+		<ul id="imgList">
+			<li><img src="img/1.jpg" alt=""></li>
+			<li><img src="img/2.jpg" alt=""></li>
+			<li><img src="img/3.jpg" alt=""></li>
+			<li><img src="img/4.jpg" alt=""></li>
+			<li><img src="img/5.jpg" alt=""></li>
+			<li><img src="img/1.jpg" alt=""></li>
+		</ul>
+		<div id="navDiv">
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+			<a href="javascript:;"></a>
+		</div>
+	</div>
+</body>
+<script src="js/animation.js"></script>
+<script>
+	//1.设置imgList的宽度
+	var imgList = document.getElementById('imgList');//获取ul
+	var imgArr = document.getElementsByTagName('img');//获取所有的图片
+	imgList.style.width = 520*imgArr.length + "px";
+
+	//2.设置导航按钮居中
+	var navDiv = document.getElementById('navDiv');
+	var outer = document.getElementById('outer');
+	navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + "px";
+
+	//3.设置默认显示图片颜色
+	var allA = document.getElementsByTagName('a');//获取所有的底部按钮
+	var index = 0;//默认显示图片的索引
+	allA[index].style.backgroundColor = "black";
+
+	//4.为所有的底部按钮绑定单击响应函数(先执行for循环然后才执行单击响应函数)
+	for(var i=0;i<allA.length;i++){
+		allA[i].num = i;//为每一个底部按钮都添加一个index属性
+		allA[i].onclick = function(){
+			//关闭自动切换的定时器
+			clearInterval(timer);
+			index = this.num;//获取点击底部按钮的索引
+			setA();
+			//move(要执行动画的对象,要执行动画的样式,执行动画的目标位置,移动的速度,回调函数)
+			move(imgList,"left",-520*index,20,function(){
+				//动画执行完毕开启自动切换
+				autoChange();
+			});
+		}
+	}
+	autoChange();
+
+	//5.创建一个方法用来设置选中的底部按钮
+	function setA(){
+		//判断当前索引是否为最后一张图片
+		if(index >= imgArr.length - 1){
+			//则将index设置为0
+			index = 0;
+			//此时显示的最后一张图片，而最后一张图片和第一张是一摸一样
+			//通过CSS将最后一张切换成第一张
+			imgList.style.left = 0;
+		}
+		//遍历所有的a，并将他们的背景颜色设置为红色
+		for(var i=0;i<allA.length;i++){
+			allA[i].style.backgroundColor = "";
+		}
+		//将选中的a设置为黑色
+		allA[index].style.backgroundColor = "black";//this = allA[index]
+	}
+
+	//定义一个自动切换的定时器的标识
+	var timer;
+	
+	//6.创建一个函数，用来开启自动切换图片
+	function autoChange(){
+		timer = setInterval(function(){
+			//使索引自增
+			index++;
+			//判断index的值当大于图片的索引则index=0
+			index %= imgArr.length;
+			//执行动画
+			move(imgList,"left",-520*index,20,function(){
+				//切换底部按钮
+				setA();
+			});
+		},2000)
+	}
+</script>
+</html>

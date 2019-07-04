@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>198-面向对象-轮播图.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		img{
+			width: 100%;
+			height: 100%;
+		}
+		/*并集选择器*/
+		.leftbtn,.rightbtn{
+			position: absolute;
+			top: 50%;	
+			margin-top: -30px;
+			width: 50px;
+			height: 60px;
+			line-height: 60px;
+			text-align:center;
+			font-size: 30px;
+			color: #fff;
+			background-color: rgba(0,0,0,0.3);
+			cursor: pointer;
+		}
+		.leftbtn{
+			left: 0;
+		}
+		.rightbtn{
+			right: 0;
+		}
+		.bottombtn{
+			position: absolute;
+			bottom: 10px;
+			left: 50%;
+		}
+		.bottombtn li{
+			float: left;
+			width: 30px;
+			height: 30px;
+			margin-right: 15px;
+			background:  rgba(0,0,0,0.5);
+			border-radius: 50%;
+			cursor: pointer;
+		}
+		.bottombtn li.active{
+			background: rgba(255,0,0,0.7);
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		
+	</div>
+</body>
+<script src="js/animation.js"></script>
+<script>
+	function Coursel(options){
+		//1.罗列属性
+		this.box  = document.getElementById(options.id);
+		this.width = options.width;
+		this.height = options.height;
+		this.img = options.img;
+
+		this.oUlImg = null;
+		this.oLeftBtn = null;
+		this.oRightBtn = null;
+		this.oUlBtns = null;
+
+		//设置轮播图时间
+		this.playtime = options.playtime;
+
+		//默认显示第一张图片
+		this.now = 0;
+
+		//2.初始化页面
+		this.init();
+		
+		//3.绑定事件
+		this.bindEvent();
+
+		//4.是否自动轮播
+		//如果playtime有值并且不是0才进行轮播
+		if(this.playtime){
+			this.auto();
+		}
+	}
+
+
+	Coursel.prototype.init = function(){
+		//1.给外层父容器添加样式
+		this.box.style.position = "relative";
+		this.box.style.width = this.width + "px";
+		this.box.style.height = this.height + "px";
+		this.box.style.marginTop = "100px";
+		this.box.style.marginLeft= "250px";
+		//1.1生成图片父容器
+		this.oUlImg = document.createElement('ul');
+		//1.2限制图片父容器宽高
+		this.oUlImg.style.width = "100%";
+		this.oUlImg.style.height = "100%";
+		//1.3生成每一个li
+		for(var i =0;i<this.img.length;i++){
+			//生成li
+			var oLi = document.createElement('li');
+			//设置li的样式
+			oLi.style.width = "100%";
+			oLi.style.height = "100%";
+			oLi.style.position = "absolute";
+			oLi.style.top = 0;
+			oLi.style.left = 0;
+			//默认显示第一张图片
+			if(i == 0){
+				oLi.style.zIndex = 99;
+			}
+			//生成图片
+			var oImg = document.createElement('img');
+			//让图片的地址指向没一个li
+			oImg.src = this.img[i];
+			//将图片插入到li中
+			oLi.appendChild(oImg);
+			//将li插入到图片父容器中
+			this.oUlImg.appendChild(oLi);
+		}
+
+
+		//2.生成左右按钮
+		this.oLeftBtn = document.createElement("span");
+		this.oRightBtn = document.createElement("span");
+		//2.1给按钮添加样式
+		this.oLeftBtn.className = 'leftbtn';
+		this.oRightBtn.className = 'rightbtn';
+		//2.2改变按钮显示等级
+		this.oLeftBtn.style.zIndex = "999";
+		this.oRightBtn.style.zIndex = "999";
+		//2.3左右按钮添加内容
+		this.oLeftBtn.innerHTML = "&lt;";
+		this.oRightBtn.innerHTML = "&gt;";
+
+
+		//3.生成底部按钮
+		this.oUlBtns = document.createElement('ul');
+		//3.1改变底部按钮显示等级
+		this.oUlBtns.style.zIndex = 999;
+		//3.2给底部按钮添加样式
+		this.oUlBtns.className = "bottombtn";
+		for(var j = 0;j<this.img.length;j++){
+			var oLi = document.createElement('li');
+			//默认第一个被选中
+			if(j == 0){
+				oLi.className = "active";
+			}
+			//将底部按钮插入到每一个li中
+			this.oUlBtns.appendChild(oLi);
+		}
+
+
+		//4.将图片父容器插入到外层父容器中
+		this.box.appendChild(this.oUlImg);
+		//将左右按钮插入到外层父容器中
+		this.box.appendChild(this.oLeftBtn);
+		this.box.appendChild(this.oRightBtn);
+		//将按钮父容器插入到外层父容器中
+		this.box.appendChild(this.oUlBtns);
+		//通过js控制底部按钮的位子
+		this.oUlBtns.style.marginLeft = -this.oUlBtns.offsetWidth*0.5 + "px";
+	}
+
+
+	Coursel.prototype.bindEvent = function(){
+		//存值(这里的this是Coursel)
+		var _this = this;
+
+
+		//1.给右箭头绑定点击事件
+		this.oRightBtn.onclick = function(){
+			_this.now++;
+
+			//判断如果显示的为最后一张图片则回到初始状态
+			if(_this.now > _this.img.length - 1){
+				_this.now = 0;
+			}
+			//调用tab函数来实现左右切换功能
+			_this.tab();
+		}
+
+
+		//2.给左箭头绑定点击事件
+		this.oLeftBtn.onclick = function(){
+			_this.now--;
+
+			//判断如果显示的为第一张图片之后则回到最后一张图片
+			if(_this.now < 0){
+				_this.now = _this.img.length - 1;
+			}
+			//调用tab函数来实现左右切换功能
+			_this.tab();
+		}
+
+
+		//3.给底部按钮添加事件
+		for(var j = 0;j<this.oUlBtns.children.length;j++){
+			//存值(确定当前下标数值)
+			this.oUlBtns.children[j].index = j;
+
+			this.oUlBtns.children[j].onclick = function(){
+
+				//绑定事件在每一个按钮上
+				_this.now = this.index;
+				//调用tab函数来实现左右切换功能
+				_this.tab();
+			}
+		}
+	}
+
+	//左右按钮切换图片
+	Coursel.prototype.tab = function(){
+		//循环遍历li
+		for(var i = 0;i<this.oUlImg.children.length;i++){
+			//HTMLCollection(3) [li, li, li]*3
+			console.log(this.oUlImg.children)
+
+			//清空上一张图片的样式
+			this.oUlImg.children[i].style.zIndex = 0;
+
+			//设置图片默认的透明度
+			this.oUlImg.children[i].style.opacity = 0.2;
+
+			//底部按钮的样式为空	
+			this.oUlBtns.children[i].className = "";
+		}
+
+		//显示当前点击的那张图片
+		this.oUlImg.children[this.now].style.zIndex = "99";
+
+		//执行动画(图片的透明度变为1)
+		animate(this.oUlImg.children[this.now],{opacity:100},2);
+
+		//显示当前点击的那张图片的底部按钮
+		this.oUlBtns.children[this.now].className = "active";
+	}
+
+
+	//自动轮播
+	Coursel.prototype.auto = function(){
+		//存值(这里的this是Coursel)
+		var _this = this;
+
+		//设置定时器
+		var timer = null;
+
+		//自动轮播(相当于执行一次点击右侧按钮)
+		timer = setInterval(this.oRightBtn.onclick,this.playtime);
+
+		//当鼠标移入停止动画
+		this.box.onmouseover = function(){
+			clearInterval(timer);
+		}
+
+		//鼠标移除重新开始动画
+		this.box.onmouseout = function(){
+			timer = setInterval(_this.oRightBtn.onclick,_this.playtime);
+		}
+	}
+
+
+	new Coursel({
+		id:"box",
+		width:1000,
+		height:400,
+		img:["images/b1.jpg","images/b2.jpg","images/b3.jpg"],
+		//自动轮播(3s)
+		playtime:5000
+	});
+</script>
+</html>

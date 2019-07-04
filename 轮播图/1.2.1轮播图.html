@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		#outer{
+
+			position: relative;
+			height: 500px;
+			overflow: hidden;
+		}
+		#imgList{
+			position: absolute;
+			left: 0px;
+
+		}
+		#imgList li{
+			float: left;
+			box-sizing: border-box;
+		}
+		#imgList li img{
+			height: 500px;
+		}
+		#navDiv{
+			position: absolute;
+			bottom: 20px;
+		}
+		#navDiv span{
+			float: left;
+			width: 50px;
+			height: 15px;
+			background-color: #ddd;
+			margin: 0 5px;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+<body>
+	<div id="outer">
+		<ul id="imgList">
+			<li><img src="img/logo1.png" alt=""></li>
+			<li><img src="img/logo2.png" alt=""></li>
+			<li><img src="img/logo3.png" alt=""></li>
+			<li><img src="img/logo1.png" alt=""></li>
+		</ul>
+		<div id="navDiv">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+</body>
+<script src="js/animation.js"></script>
+<script>
+	//1.设置imgList的宽度
+	var imgList = document.getElementById('imgList');
+	var imgArr = document.getElementsByTagName('img');
+	for(var i=0;i<imgArr.length;i++){
+		imgArr[i].style.width = window.innerWidth + "px";
+	}
+	imgList.style.width = window.innerWidth*imgArr.length + "px";
+
+	//2.设置导航按钮居中
+	var navDiv =  document.getElementById('navDiv');
+	outer.style.width = window.innerWidth+ "px";
+	navDiv.style.left = (outer.offsetWidth - navDiv.offsetWidth)/2 + "px";
+
+	//3.设置默认显示图片颜色
+	var oSpan = document.getElementsByTagName('span');
+	var index = 0;//默认显示图片的索引
+	oSpan[index].style.backgroundColor = "#ff6700";
+	for(var i=0;i<oSpan.length;i++){
+		oSpan[i].num = i;
+		oSpan[i].onclick = function(){
+			clearInterval(timer);
+			index = this.num;
+			setA();
+			move(imgList,"left",-(window.innerWidth)*index,30,function(){
+				autoChange();
+			})
+		}
+	}
+	autoChange()
+
+	//4.创建一个方法用来设置选中的底部按钮
+	function setA(){
+		if(index >= imgArr.length - 1){
+			index = 0;
+			imgList.style.left = 0;
+		}
+		for(var i=0;i<oSpan.length;i++){
+			oSpan[i].style.backgroundColor = "";
+		}
+		oSpan[index].style.backgroundColor = "#ff6700";//this = allA[index]
+	}
+	
+	var timer;
+	//5.创建一个函数，用来开启自动切换图片
+	function autoChange(){
+		timer = setInterval(function(){
+			index++;
+			//判断index的值当大于图片的索引则index=0
+			index %= imgArr.length;
+			//执行动画
+			move(imgList,"left",-(window.innerWidth)*index,30,function(){
+				setA();
+			});
+			//切换底部按钮
+			
+		},5000);
+	}
+
+	// //6.当鼠标放到图片上停止定时器
+	// outer.onmouseover = function(){
+	// 	clearInterval(timer);
+	// }
+
+	// //7.当鼠标移除图片上开启定时器
+	// outer.onmouseout = function(){
+	// 	autoChange();
+	// }
+</script>
+</html>

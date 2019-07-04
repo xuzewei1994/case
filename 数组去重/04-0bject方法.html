@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script>
+
+	//创建一个数组
+	var arr = [2,6,9,14,14,14,2,7,6,3,14];
+	console.log(arr);
+
+	//创建一个新的数组用来保存去重后的值
+	var result = [];
+
+	//创建一个空对象用来进行存值
+	var obj = {};
+
+	//获取数组中的每一个元素
+	for(var i=0;i<arr.length;i++){
+
+		//将对象的属性值设为空
+		obj[arr[i]] = "";
+	}
+	for(attr in obj){
+
+			//将新的数组变为数字类型
+			result.push(attr*1);
+		}
+		console.log(result);
+</script>
+</html>

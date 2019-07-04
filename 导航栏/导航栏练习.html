@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>导航栏练习.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.nav{
+			position: relative;
+			width: 100%;
+			height: 100px;
+			background-color: #bfbfbf;
+		}
+		.nav .container{
+			position: relative;
+			width: 1228px;
+			height: 100px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.nav .header-nav-content{
+			position: absolute;
+			width: 100%;
+			height: 0px;
+			background-color: #fff;
+			box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+			/*隐藏内容*/
+			overflow: hidden;
+		}
+		.nav .header-nav-content li{
+			float: left;
+			width: 200px;
+			height: 100%;
+			text-align: center;
+		}
+		a{
+			text-decoration: none;
+		}
+		.nav .header-nav-content li .img-box{
+			/*margin-top: 20px;*/
+			width: 200px;
+			height: 150px;
+			border-right: 1px solid #ccc;
+		}
+		.img-box .show{
+			margin-left: 70px;
+			width: 60px;
+			height: 20px;
+			color: #ff6700;
+			border: 1px solid #ff6700;
+		}
+		.img-box img{
+			margin-top: 10px;
+			width: 100px;
+			height: 120px;
+		}
+		.img-box .img-content{
+			color: black;
+		}
+		.img-box .img-price{
+			color: #ff6700;
+		}
+		.container .logo{
+			position: absolute;
+			top: 25px;
+			left: 0px;
+			width: 50px;
+			height: 50px;
+			line-height: 50px;
+			font-size: 30px;
+			text-align: center;
+			background-color: #ff6700;
+		}
+		.container .search{
+			position: absolute;
+			top: 25px;
+			right: 0;
+			width: 200px;
+			height: 50px;
+			line-height: 50px;
+			font-size: 30px;
+			text-align: center;
+			background-color: #ff6700;
+		}
+		.container .item{
+			position: absolute;
+			top: 25px;
+			left: 100px;
+			width: 880px;
+			height: 50px;
+			line-height: 50px;
+
+		}
+		.container .item .list li{
+			float: left;
+			width: 86px;
+			text-align: center;
+			font-size: 16px;
+			cursor: pointer;
+
+		}
+		.container .item .list li:hover{
+			color: #ff6700;
+		}
+		
+	</style>
+</head>
+<body>
+	<div class="nav">
+		<div class="container">
+			<div class="logo">mi</div>
+			<div class="item">
+				<ul class="list">
+					<li>小米手机</li>
+					<li>红米</li>
+					<li>电视</li>
+					<li>笔记本</li>
+					<li>家电</li>
+					<li>新品</li>
+					<li>路由器</li>
+					<li>智能硬件</li>
+					<li>服务</li>
+					<li>社区</li>
+				</ul>
+			</div>
+			<div class="search">搜索</div>
+		</div>
+		<div class="header-nav-content">
+			<div  class="container">
+				<!-- <ul>
+					<li>
+						<a href="#">
+							<div class="img-box">
+								<div class="show">新品</div>
+								<img src="./img/p1.png" alt="">
+								<p class="img-content">小米9</p>
+								<p class="img-price">2999元</p>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="img-box">
+								<div class="show">新品</div>
+								<img src="./img/p1.png" alt="">
+								<p class="img-content">小米9</p>
+								<p class="img-price">2999元</p>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="img-box">
+								<div class="show">新品</div>
+								<img src="./img/p1.png" alt="">
+								<p class="img-content">小米9</p>
+								<p class="img-price">2999元</p>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="img-box">
+								<div class="show">新品</div>
+								<img src="./img/p1.png" alt="">
+								<p class="img-content">小米9</p>
+								<p class="img-price">2999元</p>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="img-box">
+								<div class="show">新品</div>
+								<img src="./img/p1.png" alt="">
+								<p class="img-content">小米9</p>
+								<p class="img-price">2999元</p>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="img-box">
+								<div class="show">新品</div>
+								<img src="./img/p1.png" alt="">
+								<p class="img-content">小米9</p>
+								<p class="img-price">2999元</p>
+							</div>
+						</a>
+					</li>
+				</ul> -->
+			</div>
+		</div>
+	</div>
+</body>
+<script src="../animation/animation.js"></script>
+<script src="./data.js"></script>
+<script>
+	handleNav();
+	function handleNav(){
+		//1.获取元素
+		var aLi = document.querySelectorAll('.list li');//获取每个li
+		var oNav = document.querySelector('.header-nav-content');
+		var oContainer = document.querySelector('.header-nav-content .container')//获取下拉菜单
+		var hideNavTimer = null;
+		//2.循环遍历每一个li,绑定事件
+		for(var i=0;i<aLi.length-2;i++){
+			(function(i){
+				aLi[i].onmouseenter = function(){
+					//每次移入清除上一次定时器
+					clearInterval(hideNavTimer);
+					//js显示上边框
+					oNav.style.borderTop = "1px solid #ddd";
+					//动画显示导航下拉列表
+					animation(oNav,{height:200},30,true,function(){
+						oNav.style.overflow = "visible";
+					});
+					//动态加载数据
+					loadData(i)
+				}
+				aLi[i].onmouseleave = function(){
+					hideNav();
+				}
+				//鼠标移入导航栏显示内容
+				oNav.onmouseenter = function(){
+					//清除定时器
+					clearInterval(hideNavTimer);
+				}
+				//鼠标移出导航栏隐藏内容
+				oNav.onmouseleave = function(){
+					hideNav();
+				}
+
+				//加载数据函数
+				function loadData(i){
+					var data = aNavItemData[i];//后台请求数据
+					var html = "";
+					//将html数据赋给下拉菜单的数据
+					oContainer.innerHTML = html;
+					//字符串拼接
+					html += '<ul>'
+					//循环遍历每一条数据
+					for(var j=0;j<data.length;j++){
+						html +=	'<li>'
+						html +=	'<a href="'+data[j].url+'">'
+						html +=	'<div class="img-box">'
+						//判断有没有tag属性(新品)
+						if(data[j].tag){
+							html +=	'<div class="tag">'+data[j].tag+'</div>'
+						}
+						html +=	'<img src="'+data[j].src+'" alt="">'
+						html +=	'<p class="img-content">'+data[j].name+'</p>'
+						html +=	'<p class="img-price">'+data[j].price+'</p>'
+						html +=	'</div>'
+						html +=	'</a>'
+						html +=	'</li>'
+					}
+					html += '</ul>'	
+				}
+			})(i);
+		}
+		//隐藏下拉列表通用函数
+		function hideNav(){
+			hideNavTimer = setTimeout(function(){
+				oNav.style.overflow = "hidden";
+				//动画隐藏导航下拉列表
+				animation(oNav,{height:0},30,true,function(){
+					//js隐藏上边框
+					oNav.style.borderTop = "none";
+				});
+			},300)
+		}
+	}
+</script>
+</html>

@@ -1,0 +1,53 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.loading{
+	position: relative;
+	width: 3px;
+	height: 20px;
+	margin: 0 auto;
+	background-color: #ff6700;
+	/*延时0秒*/
+	animation: sport 0.3s linear 0s alternate infinite;
+}
+
+/*用伪类选择器在前后添加竖线*/
+.loading:after,.loading:before{
+	/*添加定位让元素同行显示*/
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 3px;
+	height: 20px;
+	background-color: #ff6700;
+	/*内容为空*/
+	content: "";
+}
+.loading:before{
+	/*左移*/
+	margin-left: -10px;
+	/*拉伸(水平不变垂直拉伸0.5)*/
+	transform: scale(1,0.5);
+	/*延时0.5秒*/
+	animation: sport 0.3s linear 0.5s alternate infinite;
+}
+.loading:after{
+	/*右移*/
+	margin-left: 10px;
+	/*拉伸(水平不变垂直拉伸0.3)*/
+	transform: scale(1,0.3);
+	/*(alternate：往返 infinite：无限循环)延时0.3秒*/
+	animation: sport 0.3s linear 0.3s alternate infinite;
+}
+/*动画效果*/
+@keyframes sport{
+	from{
+		transform: scale(1,0.4);
+		opacity: 0.3;
+	}
+	to{
+		transform: scale(1);
+		opacity: 1;
+	}
+}

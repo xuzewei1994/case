@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<img src="img/1.jpg" alt="" id="img"><br></br>
+	<button id="btn1">开始</button>
+	<button id="btn2">停止</button> 
+</body>
+<script>
+	var oImg = document.getElementById('img');
+	var oBtn1 = document.getElementById('btn1');
+	var oBtn2 = document.getElementById('btn2');
+
+	//创建一个数组来保存图片的路径
+	var imgArr = ["img/1.jpg","img/2.jpg","img/3.jpg","img/4.jpg","img/5.jpg"]
+
+	//创建一个变量用来保存当前图片的索引
+	var index = 0;//默认显示第一张图片
+
+	//定义一个变量用来保存定时器的标识
+	var timer = null;
+
+	//点击开始按钮启动定时器
+	oBtn1.onclick = function(){
+
+		//在开启定时器之前，需要将当前元素上的其他定时器关闭
+		clearInterval(timer);
+
+		//开启定时器来自动切换图片
+		timer = setInterval(function(){
+
+			//使索引自增
+			index++;
+
+			//判断索引是否超过图片最大索引
+			index %= imgArr.length;
+
+			//修改oImg的src属性
+			oImg.src = imgArr[index];
+
+		},1000);	
+	}
+
+	//点击停止按钮停止定时器
+	oBtn2.onclick = function(){
+		clearInterval(timer);
+	}
+</script>
+</html>
