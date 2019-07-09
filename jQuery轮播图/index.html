@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>电商网站加载数据</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/all.css">
+	<link rel="stylesheet" href="css/common.css">
+</head>
+<style>
+/*共通属性开始*/
+	body{
+		font-size: 15px;
+	}
+
+	.container{
+		width: 1200px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/*清除浮动共通开始*/
+	.fl{
+		float: left;
+	}
+	.fr{
+		float: right;
+	}
+	.clearfix:after{
+		content: "";
+		display: block;
+		clear: both;
+	}
+	.clearfix{
+		zoom: 1;
+	}
+	/*清除浮动共通结束*/
+
+
+	/*a链接共通部分开始*/
+	a{
+		color: #3c434a;
+		text-decoration: none;
+	}
+
+	a.link:hover{
+		color: #e3534c;
+	}
+	a.default{
+		color: #e3534c;
+	}
+	/*a链接共通部分结束*/
+
+
+	/*动画共通部分开始*/
+	.transition{
+		transition: all 0.5s;
+	}
+	/*动画共通部分结束*/
+/*共通属性结束*/
+
+/*轮播图区域开始*/
+	.carousel{
+		position: relative;
+		left: 50%;
+		margin-left: -364px;
+	}
+	.focus .carousel-wrap,
+	.focus .carousel-wrap .carousel-item img {
+		width: 728px;
+		height: 504px;
+		/*display: none;*/
+	}
+	.carousel-wrap{
+		position: relative;
+		overflow: hidden;
+	}
+	.carousel-wrap .carousel-item{
+		position: absolute;
+		left:0;
+		top:0;
+		width: 100%;
+		height: 100%;
+	}
+	.carousel-wrap .btns{
+		position: absolute;
+		left:50%;
+		margin-left: -34px;
+		bottom: 20px;
+	}
+	.carousel-wrap .btn-item{
+		float: left;
+		width: 12px;
+		height: 12px;
+		background: rgba(0,0,0,0.8);
+		border-radius: 50%;
+		margin-right: 5px;
+		cursor: pointer;
+	}
+	.carousel-wrap .btn-item.active{
+		background: #fff;
+	}
+
+	.carousel-wrap .control {
+		display: none;
+		position: absolute;
+		top:50%;
+		width: 30px;
+		height: 60px;
+		line-height: 60px;
+		text-align: center;
+		background: rgba(0,0,0,0.8);
+		font-size: 20px;
+		color: #fff;
+		margin-top: -30px;
+		cursor: pointer;
+		user-select: none;
+	}
+	.carousel-wrap .control-left{
+		left:0;
+	}
+	.carousel-wrap .control-right{
+		right: 0;
+	}
+	.carousel-wrap.fade .carousel-item{
+		display: none;
+	}
+	.carousel-wrap.slide .carousel-item{
+		left:100%;
+	}
+/*轮播图区域结束*/
+</style>
+<body>
+<!-- 焦点区域开始 -->
+	<div class="focus">
+		<div class="container">
+			<div class="carousel fl">
+				<div class="carousel-wrap">
+					<ul class="imgs">
+						<li class="carousel-item">
+							<a href="#">
+								<img class="carousel-img" src="images/focus-carousel/1.png" alt="">
+							</a>
+						</li>
+						<li class="carousel-item">
+							<a href="#">
+								<img class="carousel-img" src="images/focus-carousel/2.png" alt="">
+							</a>
+						</li>
+						<li class="carousel-item">
+							<a href="#">
+								<img class="carousel-img" src="images/focus-carousel/3.png" alt="">
+							</a>
+						</li>
+						<li class="carousel-item">
+							<a href="#">
+								<img class="carousel-img" src="images/focus-carousel/4.png" alt="">
+							</a>
+						</li>															
+					</ul>
+					<ul class="btns">
+						<li class="btn-item"></li>
+						<li class="btn-item"></li>
+						<li class="btn-item"></li>
+						<li class="btn-item"></li>
+					</ul>
+					<span class="control control-left">&lt;</span>
+					<span class="control control-right">&gt;</span>
+				</div>			
+			</div>
+		</div>
+	</div>
+<!-- 焦点区域结束 -->
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/showHide.js"></script>
+<script src="js/dropdown.js"></script>
+<script src="js/coursel.js"></script>
+<script src="js/index.js"></script>
+</html>

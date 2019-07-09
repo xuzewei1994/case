@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>电商网站加载数据</title>
+	<link rel="stylesheet" href="css/all.css">
+</head>
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	body{
+	font-size: 15px;
+	}
+
+	.container{
+		width: 1200px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/*清除浮动共通开始*/
+	.fl{
+		float: left;
+	}
+	.fr{
+		float: right;
+	}
+	.clearfix:after{
+		content: "";
+		display: block;
+		clear: both;
+	}
+	.clearfix{
+		zoom: 1;
+	}
+	/*清除浮动共通结束*/
+
+
+	/*a链接共通部分开始*/
+	a{
+		color: #3c434a;
+		text-decoration: none;
+	}
+
+	a.link:hover{
+		color: #e3534c;
+	}
+	a.default{
+		color: #e3534c;
+	}
+	/*a链接共通部分结束*/
+
+
+	/*动画共通部分开始*/
+	.transition{
+		transition: all 0.5s;
+	}
+	/*动画共通部分结束*/
+
+
+	/*下拉层共通部分开始*/
+	.dropdown{
+		position: relative;
+	}
+	.dropdown-layer{
+		position: absolute;
+		display: none;
+	}
+	.dropdown-left{
+		left: 0;
+	}
+	.dropdown-right{
+		right: 0;
+	}
+	/*下拉层共通部分结束*/
+
+	.top{
+		height: 50px;
+		background-color: #f3f5f7;
+	}
+	.top .top-left li{
+		height: 50px;
+		line-height: 50px;
+		margin-right: 10px;
+	}
+	.top .dropdown{
+		margin-left: 15px;
+	}
+	/*将a标签高度占据整个li的高度*/
+	.top .dropdown-toggle{
+		display: block;
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+	}
+	/*下拉列表共通部分开始*/
+	.menu-active .dropdown-toggle{
+		background-color: #fff;
+	}
+	.menu-active .dropdown-layer{
+		display: block;/*隐藏下拉列表*/
+	}
+	.menu-active .rotate{
+		transform: rotate(180deg);/*图标旋转*/
+	}
+	/*下拉列表共同部分结束*/
+	.dropdown-layer{
+		white-space: nowrap;/*阻止换行*/
+	}
+	.top .dropdown-layer li{
+		height: 30px;
+		padding: 0 5px;
+		line-height: 30px;
+		background-color: #fff;
+	}
+	.dropdown-layer li:hover{
+		background-color: #f3f5f7;
+	}
+</style>
+<body>
+	<!-- 顶部导航栏开始 -->
+		<header class="top">
+			<div class="container">
+				<ul class="top-left fl">
+					<li class="fl">
+						<a href="javascript:;" class="link default">亲,请登录</a>
+					</li>
+					<li class="fl">
+						<a href="javascript:;" class="link">免费注册</a>
+					</li>
+					<li class="fl">
+						<a href="javascript:;" class="link">手机逛淘宝</a>
+					</li>
+				</ul>
+				<ul class="top-right fr">
+					<li class="fr dropdown" data-active="menu">
+						<a href="javascript:;" class="link dropdown-toggle">
+							<i class="fa fa-bars transition" aria-hidden="true"></i>
+							网站导航
+						</a>
+						<ul class="dropdown-layer dropdown-right">
+							<li><a href="javascript:;" class="dropdown-show">男装</a></li>
+							<li><a href="javascript:;" class="dropdown-show">女装</a></li>
+							<li><a href="javascript:;" class="dropdown-show">阿里巴巴认证</a></li>
+							<li><a href="javascript:;" class="dropdown-show">阿里商务</a></li>
+							<li><a href="javascript:;" class="dropdown-show">飞猪</a></li>
+							<li><a href="javascript:;" class="dropdown-show">聚划算</a></li>
+						</ul>
+					</li>
+					<li class="fr dropdown" data-active="menu">
+						<a href="javascript:;" class="link dropdown-toggle">
+							卖家中心
+							<i class="fa fa-user  transition" aria-hidden="true"></i>
+						</a>
+						<ul class="dropdown-layer dropdown-left">
+							<li><a href="javascript:;" class="dropdown-show">免费开店</a></li>
+							<li><a href="javascript:;" class="dropdown-show">已卖出的宝贝</a></li>
+							<li><a href="javascript:;" class="dropdown-show">销售中的宝贝</a></li>
+							<li><a href="javascript:;" class="dropdown-show">卖家服务市场</a></li>
+							<li><a href="javascript:;" class="dropdown-show">体验中心</a></li>
+						</ul>
+					</li>
+					<li class="fr dropdown" data-active="menu">
+						<a href="javascript:;" class="link dropdown-toggle">
+							商品分类
+						</a>
+					</li>
+					<li class="fr dropdown" data-active="menu">
+						<a href="javascript:;" class="link dropdown-toggle">
+							收藏夹
+							<i class="fa fa-star rotate transition" aria-hidden="true"></i>
+						</a>
+						<ul class="dropdown-layer dropdown-left">
+							<li><a href="javascript:;" class="dropdown-show">收藏的宝贝</a></li>
+							<li><a href="javascript:;" class="dropdown-show">收藏的店铺</a></li>
+						</ul>
+					</li>
+					<li class="fr dropdown" data-active="menu">
+						<a href="javascript:;" class="link dropdown-toggle">
+							我的跨淘
+							<i class="fa fa-angle-down rotate transition" aria-hidden="true"></i>
+						</a>
+						<ul class="dropdown-layer dropdown-left">
+							<li><a href="javascript:;" class="dropdown-show">已加入的宝贝</a></li>
+							<li><a href="javascript:;" class="dropdown-show">我的足迹</a></li>
+						</ul>
+					</li>
+					
+				</ul>
+			</div>
+		</header>
+	<!-- 顶部导航栏结束 -->
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/showhide.js"></script>
+<script src="js/dropdown.js"></script>
+<script>
+	(function($){
+		/*顶部导航逻辑开始*/
+		var $dropdown = $('.dropdown');
+		$dropdown.dropdown({
+			js:true,
+			mode:'slide'
+		});
+		$dropdown.on('dropdown-show dropdown-shown dropdown-hide dropdown-hidden',function(ev){
+			console.log(ev.type);
+		})
+		/*顶部导航逻辑结束*/
+	})(jQuery);
+</script>
+</html>

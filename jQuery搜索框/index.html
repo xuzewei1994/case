@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>电商网站加载数据</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/all.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<style>
+/*共通属性开始*/
+	body{
+		font-size: 15px;
+	}
+
+	.container{
+		width: 1200px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/*清除浮动共通开始*/
+	.fl{
+		float: left;
+	}
+	.fr{
+		float: right;
+	}
+	.clearfix:after{
+		content: "";
+		display: block;
+		clear: both;
+	}
+	.clearfix{
+		zoom: 1;
+	}
+	/*清除浮动共通结束*/
+
+
+	/*a链接共通部分开始*/
+	a{
+		color: #3c434a;
+		text-decoration: none;
+	}
+
+	a.link:hover{
+		color: #e3534c;
+	}
+	a.default{
+		color: #e3534c;
+	}
+	/*a链接共通部分结束*/
+
+
+	/*动画共通部分开始*/
+	.transition{
+		transition: all 0.5s;
+	}
+	/*动画共通部分结束*/
+/*共通属性结束*/
+
+/*头部搜索开始*/
+	.header{
+		height: 100px;
+		background-color: #fff;
+	}
+	.header-logo{
+		display: block;
+		width: 248px;
+		height: 70px;
+		margin-top: 15px;
+		background-image: url(./images/header-logo.png);
+		background-repeat: no-repeat;
+	}
+	.search{
+		position: relative;
+		margin-top: 30px;
+		margin-left: 200px;
+		box-sizing: border-box;
+	}
+	.search .search-input{
+		width: 400px;
+		height: 40px;
+		padding-left: 8px;
+		outline: none;
+		border: 1px solid #ccc;
+		box-sizing: border-box;
+	}
+	.search .search-btn{
+		width: 80px;
+		height: 40px;
+		text-align: center;
+		line-height: 40px;
+		outline: none;
+		border: none;
+		color: #fff;
+		background-color: #000;
+		cursor: pointer;
+		box-sizing: border-box;
+	}
+	.search-layer{
+		position: absolute;
+		top: 40px;
+		left: 0px;
+		width: 100%;
+		background-color: #fff;
+		border: 1px solid #ccc;
+		/*border-top: none;*/
+		box-sizing: border-box;
+		display: none;
+	}
+	.search-layer li{
+		height: 30px;
+		line-height: 30px;
+		padding-left: 10px;
+		box-sizing: border-box;
+		cursor: pointer;
+	}
+	.search-layer li:hover{
+		background-color: #f3f5f7;
+	}
+/*头部搜索结束*/
+</style>
+<body>
+<!-- 头部搜索开始 -->
+	<section class="header">
+		<div class="container">
+			<h1 class="fl">
+				<a href="#" class="header-logo"></a>
+			</h1>
+			<div class="search fl clearfix">
+				<!-- 需要提交数据的地址 -->
+				<!-- "https://s.taobao.com/search" -->
+				<form action="https://s.taobao.com/search" class="search-form">
+					<!-- 给输入框名字name="q"用来接收数据 -->
+					<input type="text" class="search-input fl" 
+					autocomplete="off" name="q">
+					<input type="submit" class="search-btn fl">
+				</form>
+				<ul class="search-layer">
+					<!-- <li>保温杯</li>
+					<li>保温杯</li>
+					<li>保温杯</li>
+					<li>保温杯</li>
+					<li>保温杯</li> -->
+				</ul>
+			</div>
+		</div>
+	</section>
+<!-- 头部搜索结束 -->
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/showHide.js"></script>
+<script src="js/dropdown.js"></script>
+<script src="js/search.js"></script>
+<script src="js/index.js"></script>
+</html>
