@@ -28,9 +28,6 @@
 	Coursel.prototype = {
 		constructor:Coursel,
 		init:function(){
-			//图片加载默认显示的图片[下标 DOM节点]
-			this.$elem.trigger('coursel-show',[this.now,this.$courselItems.eq(this.now)]);
-
 			var _this = this;
 
 			//判断是否用滑入滑出

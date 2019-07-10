@@ -28,10 +28,6 @@
 	Coursel.prototype = {
 		constructor:Coursel,
 		init:function(){
-			//图片加载默认显示的图片[下标 DOM节点]
-			this.$elem.trigger('coursel-show',[this.now,this.$courselItems.eq(this.now)]);
-
-			var _this = this;
 
 			//判断是否用滑入滑出
 			if(this.options.slide){
@@ -41,17 +37,6 @@
 				this.$courselItems.eq(this.now).css({left:0});
 				//记录当前容器的宽度
 				this.itemWidth = this.$courselItems.eq(this.now).width();
-
-				//监听滑入事件
-				this.$courselItems.on('move',function(ev){
-					var index = _this.$courselItems.index(this);
-					//只监听移走事件
-					if(_this.now != index){
-						//监听将要加载事件 index:下标 this:DOM节点
-						_this.$elem.trigger('coursel-show',[index,this]);
-					}
-				})
-
 
 				/*4.初始化移动隐藏插件*/
 				this.$courselItems.move(this.options)
@@ -65,13 +50,6 @@
 				this.$elem.addClass('fade');
 				//显示第几张图片
 				this.$courselItems.eq(this.now).show();
-				
-				//监听显示事件
-				this.$courselItems.on('show',function(ev){
-					var index = _this.$courselItems.index(this);
-						//监听将要加载事件 index:下标 this:DOM节点
-						_this.$elem.trigger('coursel-show',[index,this]);
-				})
 
 				/*4.初始化显示隐藏插件*/
 				this.$courselItems.showHide(this.options)
@@ -110,7 +88,7 @@
 				}
 
 				/*7.监听底部按钮事件*/
-				
+				var _this = this;
 				this.$courselBtns.on('click',function(){
 					//获取当前索引值
 					var index = _this.$courselBtns.index(this);

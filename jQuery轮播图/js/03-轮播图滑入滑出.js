@@ -28,10 +28,6 @@
 	Coursel.prototype = {
 		constructor:Coursel,
 		init:function(){
-			//图片加载默认显示的图片[下标 DOM节点]
-			this.$elem.trigger('coursel-show',[this.now,this.$courselItems.eq(this.now)]);
-
-			var _this = this;
 
 			//判断是否用滑入滑出
 			if(this.options.slide){
@@ -42,45 +38,6 @@
 				//记录当前容器的宽度
 				this.itemWidth = this.$courselItems.eq(this.now).width();
 
-				//监听滑入事件
-				this.$courselItems.on('move',function(ev){
-					var index = _this.$courselItems.index(this);
-					//只监听移走事件
-					if(_this.now != index){
-						//监听将要加载事件 index:下标 this:DOM节点
-						_this.$elem.trigger('coursel-show',[index,this]);
-					}
-				})
-
-
-				/*4.初始化移动隐藏插件*/
-				this.$courselItems.move(this.options)
-
-				/*5.(事件委托)监听点击左右按钮滑入滑出图片事件*/
-				this._tab = this._toggle;
-
-			//否则用淡入淡出
-			}else{
-				/*1.隐藏所有图片,显示默认图片*/
-				this.$elem.addClass('fade');
-				//显示第几张图片
-				this.$courselItems.eq(this.now).show();
-				
-				//监听显示事件
-				this.$courselItems.on('show',function(ev){
-					var index = _this.$courselItems.index(this);
-						//监听将要加载事件 index:下标 this:DOM节点
-						_this.$elem.trigger('coursel-show',[index,this]);
-				})
-
-				/*4.初始化显示隐藏插件*/
-				this.$courselItems.showHide(this.options)
-
-				/*5.(事件委托)监听点击左右按钮显示隐藏图片事件*/
-				this._tab = this._fade;
-			}
-
-			/*滑入滑出和淡入淡出共通部分开始*/
 				/*2.底部按钮默认选中*/
 				this.$courselBtns.eq(this.now).addClass('active');
 
@@ -91,17 +48,21 @@
 					this.$courselControls.hide();
 				}.bind(this));
 
+				/*4.初始化移动隐藏插件*/
+				this.$courselItems.move(this.options)
+
 				/*5.(事件委托)监听点击左右按钮滑入滑出图片事件*/
 				this.$elem.on('click','.control-left',function(){
 					//点击左侧按钮向右滑动(反方向)
-					this._tab(this._getCorrectIndex(this.now-1),-1);
+					this._toggle(this._getCorrectIndex(this.now-1),-1);
 				}.bind(this));
 				this.$elem.on('click','.control-right',function(){
 					//点击右侧按钮向左滑动(正方向)
-					this._tab(this._getCorrectIndex(this.now+1),1);
+					this._toggle(this._getCorrectIndex(this.now+1),1);
 				}.bind(this));
 
 				/*6.自动轮播*/
+				//是否自动轮播
 				if(this.options.autoPlay){
 					//开始自动轮播
 					this.autoPlay();
@@ -110,13 +71,58 @@
 				}
 
 				/*7.监听底部按钮事件*/
-				
+				var _this = this;
 				this.$courselBtns.on('click',function(){
 					//获取当前索引值
 					var index = _this.$courselBtns.index(this);
-					_this._tab(index);
+					_this._toggle(index);
 				})
-			/*滑入滑出和淡入淡出共通部分结束*/
+
+			//否则用淡入淡出
+			}else{
+				/*1.隐藏所有图片,显示默认图片*/
+				this.$elem.addClass('fade');
+				//显示第几张图片
+				this.$courselItems.eq(this.now).show();
+
+				/*2.底部按钮默认选中*/
+				this.$courselBtns.eq(this.now).addClass('active');
+
+				/*3.监听鼠标移入移出显示隐藏左右按钮事件*/
+				this.$elem.hover(function(){
+					this.$courselControls.show();
+				}.bind(this),function(){
+					this.$courselControls.hide();
+				}.bind(this));
+
+				/*4.初始化显示隐藏插件*/
+				this.$courselItems.showHide(this.options)
+
+				/*5.(事件委托)监听点击左右按钮显示隐藏图片事件*/
+				this.$elem.on('click','.control-left',function(){
+					this._fade(this._getCorrectIndex(this.now-1));
+				}.bind(this));
+				this.$elem.on('click','.control-right',function(){
+					this._fade(this._getCorrectIndex(this.now+1));
+				}.bind(this));
+
+				/*6.自动轮播*/
+				//是否自动轮播
+				if(this.options.autoPlay){
+					//开始自动轮播
+					this.autoPlay();
+					//鼠标移入移出开始停止轮播
+					this.$elem.hover($.proxy(this.paused,this),$.proxy(this.autoPlay,this))
+				}
+
+				/*7.监听底部按钮事件*/
+				var _this = this;
+				this.$courselBtns.on('click',function(){
+					//获取当前索引值
+					var index = _this.$courselBtns.index(this);
+					_this._fade(index);
+				})
+			}
 		},
 
 		//显示下一张图片方法
