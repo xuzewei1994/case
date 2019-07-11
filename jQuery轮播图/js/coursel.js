@@ -28,6 +28,7 @@
 	Coursel.prototype = {
 		constructor:Coursel,
 		init:function(){
+			
 			//图片加载默认显示的图片[下标 DOM节点]
 			this.$elem.trigger('coursel-show',[this.now,this.$courselItems.eq(this.now)]);
 
@@ -51,7 +52,6 @@
 						_this.$elem.trigger('coursel-show',[index,this]);
 					}
 				})
-
 
 				/*4.初始化移动隐藏插件*/
 				this.$courselItems.move(this.options)
