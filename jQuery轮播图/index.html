@@ -134,6 +134,29 @@
 		left:100%;
 	}
 /*轮播图区域结束*/
+
+/*今日热销开始*/
+	.todays{
+		height: 158px;
+		background: #fff;
+	}
+	.todays .carousel-wrap{
+		width: 100%;
+		height: 158px;
+		z-index: 2;
+	}
+	.todays .carousel-wrap{
+		position: relative;
+		left: 50%;
+		margin-left: -600px;
+		top: 0px;
+	}
+	.todays .carousel-wrap .carousel-item img {
+		width: 240px;
+		height: 158px;
+		float: left;
+	}
+/*今日热销结束*/
 </style>
 <body>
 <!-- 焦点区域开始 -->
@@ -178,6 +201,69 @@
 		</div>
 	</div>
 <!-- 焦点区域结束 -->
+
+<!-- 今日热销开始 -->
+	<div class="todays">
+		<div class="container">
+			<div class="carousel-wrap">
+				<ul class="imgs">
+					<li class="carousel-item">
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/1.png" alt="">
+						</a>
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/2.png" alt="">
+						</a>
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/3.png" alt="">
+						</a>
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/4.png" alt="">
+						</a>
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/5.png" alt="">
+						</a>										
+					</li>
+					<li class="carousel-item">
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/6.png" alt="">
+						</a>
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/2.png" alt="">
+						</a>
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/3.png" alt="">
+						</a>
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/4.png" alt="">
+						</a>
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/5.png" alt="">
+						</a>										
+					</li>	
+					<li class="carousel-item">
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/7.png" alt="">
+						</a>
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/2.png" alt="">
+						</a>
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/3.png" alt="">
+						</a>
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/4.png" alt="">
+						</a>
+						<a href="#">
+							<img class="carousel-img" src="images/todays-carousel/loading.gif" data-src="images/todays-carousel/5.png" alt="">
+						</a>										
+				</ul>
+				<span class="control control-left">&lt;</span>
+				<span class="control control-right">&gt;</span>
+			</div>		
+		</div>
+	</div>
+<!-- 今日热销结束 -->
 </body>
 <script src="js/jquery-1.12.4.js"></script>
 <script src="js/showHide.js"></script>
